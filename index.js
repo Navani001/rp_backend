@@ -823,21 +823,6 @@ async function getEmailsForEvent(eventId) {
 }
 
 // Async function to send email
-async function sendEmail(recipients, subject, body) {
-  try {
-    await transporter.sendMail({
-      from: '"Event Manager" <navaneethakrishnan.cs23@bitsathy.ac.in>',
-      to: recipients, // Array of email addresses
-      subject: subject,
-      text: body, // Plain text body
-      html: `<p>${body}</p>`, // HTML body (optional)
-    });
-
-    console.log("Emails sent successfully");
-  } catch (error) {
-    console.error("Error sending emails:", error);
-  }
-}
 
 // Function to get emails of students registered for an event
 function getEmailsForEvent(eventId, callback) {
