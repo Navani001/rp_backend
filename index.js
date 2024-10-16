@@ -25,28 +25,6 @@ const authenticateToken = require("./middlewares/jwt.js");
 const nodemailer = require("nodemailer");
 
 // Create a transporter object
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    type: "OAuth2",
-    user: "navaneethakrishnan.cs23@bitsathy.ac.in", // Your Gmail email address
-    clientId:
-      "817763532692-mepg5s5h15m5vevuj9369nqtkqgc266f.apps.googleusercontent.com", // OAuth 2.0 client ID
-    clientSecret: "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", // OAuth 2.0 client secret
-    refreshToken:
-      "1//04NlMnm368bo6CgYIARAAGAQSNwF-L9Ir_X66LLQprsRrmn2McCG-UJz48kApxqHETyIYD409psTbldE66xeqpHVPDyf39Vd9jDk", // OAuth 2.0 refresh token
-  },
-  tls: {
-    rejectUnauthorized: false, // This may be required in some environments
-  },
-});
-
-const mailOptions = {
-  from: "Personalized Skill <ps@bitsathy.ac.in>",
-  to: "navaneethakrishnan.cs23@bitsathy.ac.in",
-  subject: "reminder for event",
-  text: "gentle reminder",
-};
 
 // transporter.sendMail(mailOptions, (error, info) => {
 //   if (error) {
