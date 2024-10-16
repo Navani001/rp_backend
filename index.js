@@ -25,6 +25,28 @@ const authenticateToken = require("./middlewares/jwt.js");
 const nodemailer = require("nodemailer");
 
 // Create a transporter object
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    type: "OAuth2",
+    user: "navaneethakrishnan.cs23@bitsathy.ac.in", // Your Gmail email address
+    clientId:
+    process.env.GOOGLE_CLIENT_ID, // OAuth 2.0 client ID
+    clientSecret:  process.env.GOOGLE_CLIENT_SECRET, // OAuth 2.0 client secret
+    refreshToken:
+      "1//04NlMnm368bo6CgYIARAAGAQSNwF-L9Ir_X66LLQprsRrmn2McCG-UJz48kApxqHETyIYD409psTbldE66xeqpHVPDyf39Vd9jDk", // OAuth 2.0 refresh token
+  },
+  tls: {
+    rejectUnauthorized: false, // This may be required in some environments
+  },
+});
+
+const mailOptions = {
+  from: "Personalized Skill <ps@bitsathy.ac.in>",
+  to: "navaneethakrishnan.cs23@bitsathy.ac.in",
+  subject: "reminder for event",
+  text: "gentle reminder",
+};
 
 // transporter.sendMail(mailOptions, (error, info) => {
 //   if (error) {
@@ -823,6 +845,21 @@ async function getEmailsForEvent(eventId) {
 }
 
 // Async function to send email
+async function sendEmail(recipients, subject, body) {
+  try {
+    await transporter.sendMail({
+      from: '"Event Manager" <navaneethakrishnan.cs23@bitsathy.ac.in>',
+      to: recipients, // Array of email addresses
+      subject: subject,
+      text: body, // Plain text body
+      html: `<p>${body}</p>`, // HTML body (optional)
+    });
+
+    console.log("Emails sent successfully");
+  } catch (error) {
+    console.error("Error sending emails:", error);
+  }
+}
 
 // Function to get emails of students registered for an event
 function getEmailsForEvent(eventId, callback) {
